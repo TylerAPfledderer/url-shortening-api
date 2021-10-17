@@ -21,3 +21,12 @@ pnpm-debug.log*
 *.njsproj
 *.sln
 *.sw?
+
+# Prevent uploading of design files
+design
+*.sketch
+*.xd
+
+# Project documentation not meant for the public
+style-guide.md
+README-template.md
