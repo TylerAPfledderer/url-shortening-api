@@ -75,6 +75,21 @@
           <a href="#" class="LinkButton LinkButton--solid">Get Started</a>
         </div>
       </header>
+      <section class="UrlShortenSection">
+        <div class="UrlShortenSection__wrapper">
+          <label for="url-shorten" class="sr-hidden">Shorten a link here</label>
+          <input
+            type="url"
+            v-model="urlValue"
+            name="url-shorten"
+            id="url-shorten"
+            placeholder="Shorten a link here..."
+            class="UrlShortenSection__input"
+          />
+          <button type="submit" class="UrlShortenSection__btn">Shorten It!</button>
+        </div>
+      </section>
+      <section class="StatisticsDetailSection"></section>
     </main>
   </div>
 </template>
@@ -85,6 +100,7 @@ import heroImg from '@/assets/illustration-working.svg';
 import { ref } from 'vue';
 
 const isMenuOpen = ref(false);
+const urlValue = ref('');
 
 /**
  * Toggle the menu open/closed state
@@ -103,7 +119,7 @@ const closeMenuOnLinkClick = (event) => event.target.tagName === 'A' && (isMenuO
   --primary-cyan: hsla(180, 66%, 49%, 1);
   --primary-violet: hsla(258, 27%, 26%, 1);
   --secondary-red: hsla(0, 87%, 67%, 1);
-  --neutral-500: hsla(0, 0%, 75%, 1);
+  --neutral-500: hsl(225, 33%, 95%, 1);
   --neutral-600: hsla(258, 7%, 63%, 1);
   --neutral-700: hsla(255, 11%, 22%, 1);
   --neutral-800: hsla(260, 8%, 14%, 1);
@@ -217,11 +233,15 @@ h1 img {
   width: 100%;
 }
 
+main {
+  --url-section-margin: 168px;
+}
+
 .HeroSection {
   display: flex;
   flex-direction: column;
   gap: 40px;
-  padding: 0 var(--base-padding-x);
+  padding: 0 var(--base-padding-x) var(--url-section-margin);
 }
 
 .HeroSection__image {
@@ -249,6 +269,65 @@ h1 img {
 
 .HeroSection__statement {
   color: var(--neutral-600);
+}
+
+.UrlShortenSection {
+  padding: 0 var(--base-padding-x);
+  height: 0;
+}
+
+.UrlShortenSection__wrapper {
+  background: var(--primary-violet) url('~@/assets/bg-shorten-mobile.svg') no-repeat top right / 70%;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  padding: var(--base-padding-x);
+  row-gap: 16px;
+
+  /* So the content is vertically centered over the "dividing" line where the 0-height parent element is */
+  transform: translateY(-50%);
+}
+
+.UrlShortenSection__wrapper > * {
+  border-radius: 5px;
+  border: none;
+  height: 48px;
+}
+
+.UrlShortenSection__input,
+.UrlShortenSection__input::placeholder {
+  font-family: inherit;
+}
+
+.UrlShortenSection__input {
+  padding: 0 16px;
+}
+.UrlShortenSection__input::placeholder {
+  color: var(--neutral-700);
+  opacity: 0.5;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+}
+
+.UrlShortenSection__btn {
+  background: var(--primary-cyan);
+  color: white;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: var(--font-weight-bold);
+}
+
+.UrlShortenSection__btn:hover,
+.UrlShortenSection__btn:focus {
+  filter: brightness(1.1);
+  outline: 2px solid white;
+}
+
+.StatisticsDetailSection {
+  background: var(--neutral-500);
+  padding-top: var(--url-section-margin);
 }
 
 /* == Utilities == */
