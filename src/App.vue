@@ -98,6 +98,7 @@ const closeMenuOnLinkClick = (event) => event.target.tagName === 'A' && (isMenuO
 </script>
 
 <style>
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@500;700&display=swap');
 :root {
   --primary-cyan: hsla(180, 66%, 49%, 1);
   --primary-violet: hsla(258, 27%, 26%, 1);
