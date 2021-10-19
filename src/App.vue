@@ -42,31 +42,46 @@
       <nav class="MainNav" :class="isMenuOpen ? 'MainNav--opened' : 'MainNav--closed'" @click="closeMenuOnLinkClick">
         <ul aria-label="page links" class="MainNav__links">
           <li>
-            <a href="#">Features</a>
+            <a href="#" class="LinkButton">Features</a>
           </li>
           <li>
-            <a href="#">Pricing</a>
+            <a href="#" class="LinkButton">Pricing</a>
           </li>
           <li>
-            <a href="#">Resources</a>
+            <a href="#" class="LinkButton">Resources</a>
           </li>
         </ul>
         <hr class="MainNav__divider" />
         <ul aria-label="account links" class="MainNav__links">
           <li>
-            <a href="#">Login</a>
+            <a href="#" class="LinkButton">Login</a>
           </li>
           <li>
-            <a href="#" class="link-button">Sign Up</a>
+            <a href="#" class="LinkButton LinkButton--solid">Sign Up</a>
           </li>
         </ul>
       </nav>
     </header>
+    <main>
+      <header class="HeroSection">
+        <div class="HeroSection__image">
+          <img :src="heroImg" />
+        </div>
+        <div class="HeroSection__text">
+          <h2 class="HeroSection__title">More than just shorter links</h2>
+          <p class="HeroSection__statement">
+            Build your brand's recognition and get detailed insights on how your links are performing.
+          </p>
+          <a href="#" class="LinkButton LinkButton--solid">Get Started</a>
+        </div>
+      </header>
+    </main>
   </div>
 </template>
 
 <script setup>
 import siteLogo from '@/assets/logo.svg';
+import heroImg from '@/assets/illustration-working.svg';
 import { ref } from 'vue';
 
 const isMenuOpen = ref(false);
@@ -95,6 +110,10 @@ const closeMenuOnLinkClick = (event) => event.target.tagName === 'A' && (isMenuO
   --base-font-family: Poppins, Arial, Helvetica, sans-serif;
   --font-weight-normal: 500;
   --font-weight-bold: 700;
+
+  /* Clamp between Minor Third and Perfect Fourth */
+  --font-size-h2: clamp(2.448rem, 3.8vw + 1.5rem, 4.209rem);
+  --line-height-h2: clamp(3rem, 6.5vw + 1.5rem, 6rem);
 }
 
 /* == Reset == */
@@ -105,9 +124,12 @@ const closeMenuOnLinkClick = (event) => event.target.tagName === 'A' && (isMenuO
   padding: 0;
 }
 
+html {
+  font-size: var(--base-font-size);
+}
+
 body {
   font-family: var(--base-font-family);
-  font-size: var(--base-font-size);
 }
 
 h1 img {
@@ -194,34 +216,68 @@ h1 img {
   width: 100%;
 }
 
-.MainNav__links a {
+.HeroSection {
+  --padding-x: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 0 var(--padding-x);
+}
+
+.HeroSection__image {
+  overflow: hidden;
+  margin-right: calc(var(--padding-x) * -1);
+}
+
+.HeroSection__image img {
+  display: block;
+  width: 146%;
+}
+
+.HeroSection__text {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  row-gap: 24px;
+  text-align: center;
+}
+
+.HeroSection__title {
+  font-size: var(--font-size-h2);
+  line-height: var(--line-height-h2);
+}
+
+.HeroSection__statement {
+  color: var(--neutral-600);
+}
+
+/* == Utilities == */
+
+.LinkButton {
   color: white;
   display: block;
   font-weight: var(--font-weight-bold);
-  text-align: center;
   text-decoration: none;
-  width: 100%;
-  padding: 12px 0;
+  text-align: center;
+  padding: 12px 40px;
 }
 
-.MainNav__links a:hover,
-.MainNav__links a:focus {
+.LinkButton:hover,
+.LinkButton:focus {
   text-decoration: underline;
 }
 
-.link-button {
+.LinkButton--solid {
   background: var(--primary-cyan);
-  border-radius: 8% / 50%;
+  border-radius: 28px;
 }
 
-.link-button:hover,
-.link-button:focus {
+.LinkButton--solid:hover,
+.LinkButton--solid:focus {
   text-decoration: none !important;
   filter: brightness(1.1);
   outline: 2px solid white;
 }
-
-/* == Utilities == */
 
 .sr-hidden {
   position: absolute;
