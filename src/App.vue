@@ -110,6 +110,7 @@ const closeMenuOnLinkClick = (event) => event.target.tagName === 'A' && (isMenuO
   --base-font-family: Poppins, Arial, Helvetica, sans-serif;
   --font-weight-normal: 500;
   --font-weight-bold: 700;
+  --base-padding-x: 24px;
 
   /* Clamp between Minor Third and Perfect Fourth */
   --font-size-h2: clamp(2.448rem, 3.8vw + 1.5rem, 4.209rem);
@@ -137,11 +138,10 @@ h1 img {
 }
 
 .StickyHeader {
-  --spacing-x: 24px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 40px var(--spacing-x) 24px;
+  padding: 40px var(--base-padding-x) 24px;
 
   /* position declared for the nav menu on mobile */
   position: relative;
@@ -175,7 +175,7 @@ h1 img {
   border-radius: 10px;
   padding: 20px 24px;
   position: absolute;
-  width: calc(100% - (var(--spacing-x) * 2));
+  width: calc(100% - (var(--base-padding-x) * 2));
 
   /* top value equal to the height of the sticky header */
   top: 108px;
@@ -217,16 +217,15 @@ h1 img {
 }
 
 .HeroSection {
-  --padding-x: 24px;
   display: flex;
   flex-direction: column;
   gap: 40px;
-  padding: 0 var(--padding-x);
+  padding: 0 var(--base-padding-x);
 }
 
 .HeroSection__image {
   overflow: hidden;
-  margin-right: calc(var(--padding-x) * -1);
+  margin-right: calc(var(--base-padding-x) * -1);
 }
 
 .HeroSection__image img {
