@@ -137,6 +137,10 @@
           </li>
         </ul>
       </section>
+      <section class="BoostCtaSection">
+        <h3>Boost your links today</h3>
+        <a class="LinkButton LinkButton--solid" href="#">Get Started</a>
+      </section>
     </main>
   </div>
 </template>
@@ -441,6 +445,16 @@ main {
 
 .StatisticsDetailSection__item p {
   font-size: 15px;
+}
+
+.BoostCtaSection {
+  background: url('~@/assets/bg-boost-mobile.svg') no-repeat center right/contain var(--primary-violet);
+  color: white;
+  display: flex;
+  flex-direction: column;
+  height: 300px;
+  justify-content: center;
+  align-items: center;
 }
 
 /* == Utilities == */
