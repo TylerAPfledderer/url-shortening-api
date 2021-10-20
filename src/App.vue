@@ -69,7 +69,7 @@
         </div>
         <div class="HeroSection__text">
           <h2 class="HeroSection__title">More than just shorter links</h2>
-          <p class="HeroSection__statement">
+          <p class="HeroSection__statement text-color-light">
             Build your brand's recognition and get detailed insights on how your links are performing.
           </p>
           <a href="#" class="LinkButton LinkButton--solid">Get Started</a>
@@ -89,7 +89,54 @@
           <button type="submit" class="UrlShortenSection__btn">Shorten It!</button>
         </div>
       </section>
-      <section class="StatisticsDetailSection"></section>
+      <section class="StatisticsDetailSection">
+        <div class="section-detail">
+          <h3>
+            Advanced Statistics
+          </h3>
+          <p class="text-color-light">
+            Track how your links are performing across the web with our advanced statistics dashboard.
+          </p>
+        </div>
+        <ul aria-label="statistics features" class="StatisticsDetailSection__list">
+          <li class="StatisticsDetailSection__item">
+            <div class="StatisticsDetailSection__image">
+              <img :src="recognitionImg" alt="" />
+            </div>
+            <div>
+              <h4>Brand Recognition</h4>
+              <p class="text-color-light">
+                Boost your brand recognition with each click. Generic links don't mean a thing. Branded links help
+                instil confidence in your content.
+              </p>
+            </div>
+          </li>
+          <li class="StatisticsDetailSection__item">
+            <div class="StatisticsDetailSection__image">
+              <img :src="recordsImg" alt="" />
+            </div>
+            <div>
+              <h4>Detailed Records</h4>
+              <p class="text-color-light">
+                Gain insights into who is clicking your links. Knowing when and where people engage with your content
+                helps inform better decisions.
+              </p>
+            </div>
+          </li>
+          <li class="StatisticsDetailSection__item">
+            <div class="StatisticsDetailSection__image">
+              <img :src="customizeImg" alt="" />
+            </div>
+            <div>
+              <h4>Fully Customizable</h4>
+              <p class="text-color-light">
+                Improve brand awareness and content discoverability through customizable links, supercharging audience
+                engagement.
+              </p>
+            </div>
+          </li>
+        </ul>
+      </section>
     </main>
   </div>
 </template>
@@ -97,6 +144,9 @@
 <script setup>
 import siteLogo from '@/assets/logo.svg';
 import heroImg from '@/assets/illustration-working.svg';
+import recognitionImg from '@/assets/icon-brand-recognition.svg';
+import recordsImg from '@/assets/icon-detailed-records.svg';
+import customizeImg from '@/assets/icon-fully-customizable.svg';
 import { ref } from 'vue';
 
 const isMenuOpen = ref(false);
@@ -131,7 +181,11 @@ const closeMenuOnLinkClick = (event) => event.target.tagName === 'A' && (isMenuO
 
   /* Clamp between Minor Third and Perfect Fourth */
   --font-size-h2: clamp(2.448rem, 3.8vw + 1.5rem, 4.209rem);
-  --line-height-h2: clamp(3rem, 6.5vw + 1.5rem, 6rem);
+  --font-size-h3: clamp(1.563rem, 0.5vw + 1.5rem, 1.777rem);
+  --font-size-h4: clamp(1.25rem, 0.2vw + 1.2rem, 1.333rem);
+  --line-height-h2: clamp(2.667rem, 2.9vw + 2rem, 4rem);
+  --line-height-h3: var(--line-height-h2);
+  --line-height-h4: var(--line-height-h2);
 }
 
 /* == Reset == */
@@ -150,7 +204,27 @@ body {
   font-family: var(--base-font-family);
 }
 
-h1 img {
+h3,
+h4 {
+  margin-bottom: 24px;
+}
+
+h2 {
+  font-size: var(--font-size-h2);
+  line-height: var(--line-height-h2);
+}
+
+h3 {
+  font-size: var(--font-size-h3);
+  line-height: var(--line-height-h3);
+}
+
+h4 {
+  font-size: var(--font-size-h4);
+  line-height: var(--line-height-h4);
+}
+
+img {
   display: block;
 }
 
@@ -250,7 +324,6 @@ main {
 }
 
 .HeroSection__image img {
-  display: block;
   width: 146%;
 }
 
@@ -260,15 +333,6 @@ main {
   flex-direction: column;
   row-gap: 24px;
   text-align: center;
-}
-
-.HeroSection__title {
-  font-size: var(--font-size-h2);
-  line-height: var(--line-height-h2);
-}
-
-.HeroSection__statement {
-  color: var(--neutral-600);
 }
 
 .UrlShortenSection {
@@ -327,10 +391,63 @@ main {
 
 .StatisticsDetailSection {
   background: var(--neutral-500);
-  padding-top: var(--url-section-margin);
+  padding: var(--url-section-margin) var(--base-padding-x) 80px;
+  text-align: center;
+}
+
+.StatisticsDetailSection__list {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  list-style: none;
+}
+
+.StatisticsDetailSection__item {
+  --gap-length: 96px;
+
+  align-items: center;
+  background: white;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  margin-top: var(--gap-length);
+  padding: 0 32px 32px;
+  position: relative;
+}
+
+.StatisticsDetailSection__item:not(:first-of-type)::before {
+  --bar-width: 5px;
+  background: var(--primary-cyan);
+  content: '';
+  display: block;
+  height: var(--gap-length);
+  position: absolute;
+  top: calc(var(--gap-length) * -1);
+  left: calc(50% - (var(--bar-width) / 2));
+  width: var(--bar-width);
+}
+
+.StatisticsDetailSection__image {
+  background: var(--primary-violet);
+  border-radius: 50%;
+  padding: var(--base-padding-x);
+  position: relative;
+  top: -44px;
+}
+
+.StatisticsDetailSection__item h4 {
+  margin-bottom: 24px;
+}
+
+.StatisticsDetailSection__item p {
+  font-size: 15px;
 }
 
 /* == Utilities == */
+
+.text-color-light {
+  color: var(--neutral-600);
+}
 
 .LinkButton {
   color: white;
