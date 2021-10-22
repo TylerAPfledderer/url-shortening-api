@@ -277,6 +277,8 @@ const closeMenuOnLinkClick = (event) => event.target.tagName === 'A' && (isMenuO
   padding: 0;
 }
 
+/* == Base == */
+
 html {
   font-size: var(--base-font-size);
 }
@@ -330,6 +332,8 @@ nav a {
   text-decoration: none;
 }
 
+/* == Header == */
+
 .StickyHeader {
   display: flex;
   justify-content: space-between;
@@ -358,6 +362,8 @@ nav a {
 .MenuIcon path {
   fill: #aaa;
 }
+
+/* == Navigation == */
 
 .MainNav {
   background: var(--primary-violet);
@@ -404,9 +410,13 @@ nav a {
   width: 100%;
 }
 
+/* == Main == */
+
 main {
   --url-section-margin: 168px;
 }
+
+/* == Hero Section == */
 
 .HeroSection {
   display: flex;
@@ -431,6 +441,8 @@ main {
   row-gap: 24px;
   text-align: center;
 }
+
+/* == URL Input Section == */
 
 .UrlShortenSection {
   padding: 0 var(--base-padding-x);
@@ -486,6 +498,8 @@ main {
   outline: 2px solid white;
 }
 
+/* == Statistics Detail Section == */
+
 .StatisticsDetailSection {
   background: var(--neutral-500);
   padding: var(--url-section-margin) var(--base-padding-x) 80px;
@@ -540,6 +554,8 @@ main {
   font-size: 15px;
 }
 
+/* == Boost CTA Section == */
+
 .BoostCtaSection {
   background: url('~@/assets/bg-boost-mobile.svg') no-repeat center right/contain var(--primary-violet);
   color: white;
@@ -549,6 +565,8 @@ main {
   justify-content: center;
   align-items: center;
 }
+
+/* == Footer == */
 
 .Footer {
   background: var(--neutral-800);
