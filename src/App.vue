@@ -1,13 +1,19 @@
 <template>
   <header class="StickyHeader">
-    <a href="#">
-      <h1>
-        <img :src="siteLogo" alt="" />
-        <span class="sr-hidden">Shortly</span>
-      </h1>
-    </a>
-    <div>
-      <button type="button" :aria-expanded="isMenuOpen" class="MenuBtn" @click="toggleMenuOpen">
+    <div class="desktop-wrapper">
+      <a href="#">
+        <h1>
+          <img :src="siteLogo" alt="" />
+          <span class="sr-hidden">Shortly</span>
+        </h1>
+      </a>
+      <button
+        v-show="!isLargerThan768Screen"
+        type="button"
+        :aria-expanded="isMenuOpen"
+        class="MenuBtn"
+        @click="toggleMenuOpen"
+      >
         <svg
           v-if="!isMenuOpen"
           aria-hidden="true"
@@ -37,29 +43,33 @@
           ></path>
         </svg>
       </button>
+      <nav
+        class="MainNav"
+        :class="[isMenuOpen ? 'MainNav--opened' : 'MainNav--closed', isLargerThan768Screen && 'text-color-light']"
+        @click="closeMenuOnLinkClick"
+      >
+        <ul aria-label="page links" class="MainNav__links">
+          <li>
+            <a href="#" class="LinkButton">Features</a>
+          </li>
+          <li>
+            <a href="#" class="LinkButton">Pricing</a>
+          </li>
+          <li>
+            <a href="#" class="LinkButton">Resources</a>
+          </li>
+        </ul>
+        <hr v-show="!isLargerThan768Screen" class="MainNav__divider" />
+        <ul aria-label="account links" class="MainNav__links">
+          <li>
+            <a href="#" class="LinkButton">Login</a>
+          </li>
+          <li>
+            <a href="#" class="LinkButton LinkButton--solid">Sign Up</a>
+          </li>
+        </ul>
+      </nav>
     </div>
-    <nav class="MainNav" :class="isMenuOpen ? 'MainNav--opened' : 'MainNav--closed'" @click="closeMenuOnLinkClick">
-      <ul aria-label="page links" class="MainNav__links">
-        <li>
-          <a href="#" class="LinkButton">Features</a>
-        </li>
-        <li>
-          <a href="#" class="LinkButton">Pricing</a>
-        </li>
-        <li>
-          <a href="#" class="LinkButton">Resources</a>
-        </li>
-      </ul>
-      <hr class="MainNav__divider" />
-      <ul aria-label="account links" class="MainNav__links">
-        <li>
-          <a href="#" class="LinkButton">Login</a>
-        </li>
-        <li>
-          <a href="#" class="LinkButton LinkButton--solid">Sign Up</a>
-        </li>
-      </ul>
-    </nav>
   </header>
   <main>
     <header class="HeroSection">
@@ -228,10 +238,11 @@ import heroImg from '@/assets/illustration-working.svg';
 import recognitionImg from '@/assets/icon-brand-recognition.svg';
 import recordsImg from '@/assets/icon-detailed-records.svg';
 import customizeImg from '@/assets/icon-fully-customizable.svg';
-import { ref } from 'vue';
+import { ref, watchEffect } from 'vue';
 
-const isMenuOpen = ref(false);
+const isMenuOpen = ref(null);
 const urlValue = ref('');
+const isLargerThan768Screen = ref(null);
 
 /**
  * Toggle the menu open/closed state
@@ -241,7 +252,27 @@ const toggleMenuOpen = () => (isMenuOpen.value = !isMenuOpen.value);
 /**
  * Close the menu when a link is clicked
  */
-const closeMenuOnLinkClick = (event) => event.target.tagName === 'A' && (isMenuOpen.value = false);
+const closeMenuOnLinkClick = (event) =>
+  event.target.tagName === 'A' && !isLargerThan768Screen.value && (isMenuOpen.value = false);
+
+/**
+ * Function to set whether or not the window is equal or greater than 768px
+ */
+const checkScreenWidthAt768 = () => (isLargerThan768Screen.value = window.innerWidth >= 768);
+
+watchEffect(() => {
+  // Run initial check of the screen width at 1260px on mount
+  checkScreenWidthAt768();
+
+  // Update check as screen width changes.
+  window.addEventListener('resize', () => {
+    checkScreenWidthAt768();
+  });
+
+  // Menu needs to be visible when the screen is equal or greater than 768px
+  //  as the menu button will not be displayed
+  isMenuOpen.value = isLargerThan768Screen.value;
+});
 </script>
 
 <style>
@@ -335,13 +366,16 @@ nav a {
 /* == Header == */
 
 .StickyHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   padding: 40px var(--base-padding-x) 24px;
 
   /* position declared for the nav menu on mobile */
   position: relative;
+}
+
+.StickyHeader .desktop-wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 .MenuBtn {
@@ -363,11 +397,19 @@ nav a {
   fill: #aaa;
 }
 
+@media (min-width: 768px) {
+  .StickyHeader {
+    padding-top: 48px;
+    padding-bottom: 80px;
+  }
+}
+
 /* == Navigation == */
 
 .MainNav {
   background: var(--primary-violet);
   border-radius: 10px;
+  color: white;
   padding: 20px 24px;
   position: absolute;
   width: calc(100% - (var(--base-padding-x) * 2));
@@ -405,9 +447,37 @@ nav a {
   opacity: 0.25;
 }
 
-.MainNav__links li,
-.MainNav__links a {
+.MainNav__links li {
   width: 100%;
+}
+
+@media (min-width: 768px) {
+  .MainNav {
+    background: transparent;
+    color: black;
+    display: flex;
+    justify-content: space-between;
+    margin-left: 48px;
+    padding: 0;
+    position: unset;
+  }
+
+  .MainNav__links {
+    flex-direction: row;
+    column-gap: 32px;
+  }
+
+  .MainNav__links li {
+    width: auto;
+  }
+
+  .MainNav__links .LinkButton {
+    padding: 0;
+  }
+
+  .MainNav__links .LinkButton--solid {
+    padding: 8px 24px;
+  }
 }
 
 /* == Main == */
@@ -625,7 +695,6 @@ main {
 }
 
 .LinkButton {
-  color: white;
   font-weight: var(--font-weight-bold);
   text-decoration: none;
   text-align: center;
@@ -640,6 +709,7 @@ main {
 .LinkButton--solid {
   background: var(--primary-cyan);
   border-radius: 28px;
+  color: white;
 }
 
 .LinkButton--solid:hover,
@@ -647,6 +717,11 @@ main {
   text-decoration: none !important;
   filter: brightness(1.1);
   outline: 2px solid white;
+}
+
+.desktop-wrapper {
+  max-width: 1104px;
+  margin: 0 auto;
 }
 
 .sr-hidden {
