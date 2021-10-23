@@ -295,9 +295,9 @@ watchEffect(() => {
   --font-size-h2: clamp(2.448rem, 3.8vw + 1.5rem, 4.209rem);
   --font-size-h3: clamp(1.563rem, 0.5vw + 1.5rem, 1.777rem);
   --font-size-h4: clamp(1.25rem, 0.2vw + 1.2rem, 1.333rem);
-  --line-height-h2: clamp(2.667rem, 2.9vw + 2rem, 4rem);
-  --line-height-h3: var(--line-height-h2);
-  --line-height-h4: var(--line-height-h2);
+  --line-height-h2: clamp(2.667rem, 5.9vw + 1.3rem, 5.333rem);
+  --line-height-h3: 2.667rem;
+  --line-height-h4: 1.333rem;
 }
 
 /* == Reset == */
