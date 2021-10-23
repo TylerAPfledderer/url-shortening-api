@@ -720,7 +720,7 @@ main {
 }
 
 .desktop-wrapper {
-  max-width: 1104px;
+  max-width: 1110px;
   margin: 0 auto;
 }
 
