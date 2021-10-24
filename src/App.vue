@@ -73,15 +73,19 @@
   </header>
   <main>
     <header class="HeroSection">
-      <div class="HeroSection__image">
-        <img :src="heroImg" />
-      </div>
-      <div class="HeroSection__text">
-        <h2 class="HeroSection__title">More than just shorter links</h2>
-        <p class="HeroSection__statement text-color-light">
-          Build your brand's recognition and get detailed insights on how your links are performing.
-        </p>
-        <a href="#" class="LinkButton LinkButton--solid">Get Started</a>
+      <div class="desktop-wrapper">
+        <div class="HeroSection__image">
+          <div class="inner-wrapper">
+            <img :src="heroImg" />
+          </div>
+        </div>
+        <div class="HeroSection__text">
+          <h2 class="HeroSection__title">More than just shorter links</h2>
+          <p class="HeroSection__statement text-color-light">
+            Build your brand's recognition and get detailed insights on how your links are performing.
+          </p>
+          <a href="#" class="LinkButton LinkButton--solid">Get Started</a>
+        </div>
       </div>
     </header>
     <section class="UrlShortenSection">
@@ -289,7 +293,6 @@ watchEffect(() => {
   --base-font-family: Poppins, Arial, Helvetica, sans-serif;
   --font-weight-normal: 500;
   --font-weight-bold: 700;
-  --base-padding-x: 24px;
 
   /* Clamp between Minor Third and Perfect Fourth */
   --font-size-h2: clamp(2.448rem, 3.8vw + 1.5rem, 4.209rem);
@@ -320,6 +323,7 @@ html {
 }
 
 body {
+  --base-padding-x: 24px;
   font-family: var(--base-font-family);
 }
 
@@ -366,6 +370,12 @@ nav a {
   color: inherit;
   display: block;
   text-decoration: none;
+}
+
+@media (min-width: 1024px) {
+  body {
+    --base-padding-x: 48px;
+  }
 }
 
 /* == Header == */
@@ -494,14 +504,23 @@ main {
 /* == Hero Section == */
 
 .HeroSection {
+  padding: 0 var(--base-padding-x) var(--url-section-margin);
+}
+
+.HeroSection .desktop-wrapper {
+  align-items: center;
   display: flex;
   flex-direction: column;
   gap: 40px;
-  padding: 0 var(--base-padding-x) var(--url-section-margin);
 }
 
 .HeroSection__image {
   margin-right: calc(var(--base-padding-x) * -1);
+}
+
+.HeroSection__image .inner-wrapper {
+  /* Offset the negative margin from the parent when the image becomes centered at larger screen sizes */
+  margin-right: var(--base-padding-x);
 }
 
 .HeroSection__image img {
@@ -516,8 +535,31 @@ main {
   align-items: center;
   display: flex;
   flex-direction: column;
+  max-width: 565px;
   row-gap: 24px;
   text-align: center;
+}
+
+@media (min-width: 1024px) {
+  .HeroSection .desktop-wrapper {
+    flex-direction: row-reverse;
+  }
+
+  .HeroSection__image img {
+    width: 160%;
+    max-width: 733px;
+  }
+
+  .HeroSection__text {
+    align-items: flex-start;
+    text-align: left;
+  }
+}
+
+@media (min-width: 1206px) {
+  .HeroSection .desktop-wrapper {
+    column-gap: 96px;
+  }
 }
 
 /* == URL Input Section == */
