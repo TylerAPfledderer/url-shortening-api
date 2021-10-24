@@ -505,7 +505,11 @@ main {
 }
 
 .HeroSection__image img {
+  /* Percentage width allows the overflow while keeping the image within the left-side of the parent */
   width: 146%;
+  /* In this instance, defines what would be the set width (see comment about width property value) */
+  max-width: 438px;
+  margin: 0 auto;
 }
 
 .HeroSection__text {
