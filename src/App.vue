@@ -75,9 +75,7 @@
     <header class="HeroSection">
       <div class="desktop-wrapper">
         <div class="HeroSection__image">
-          <div class="inner-wrapper">
-            <img :src="heroImg" />
-          </div>
+          <img :src="heroImg" />
         </div>
         <div class="HeroSection__text">
           <h2 class="HeroSection__title">More than just shorter links</h2>
@@ -512,15 +510,6 @@ main {
   display: flex;
   flex-direction: column;
   gap: 40px;
-}
-
-.HeroSection__image {
-  margin-right: calc(var(--base-padding-x) * -1);
-}
-
-.HeroSection__image .inner-wrapper {
-  /* Offset the negative margin from the parent when the image becomes centered at larger screen sizes */
-  margin-right: var(--base-padding-x);
 }
 
 .HeroSection__image img {
