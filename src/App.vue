@@ -310,6 +310,11 @@ watchEffect(() => {
 
 /* == Base == */
 
+html,
+body {
+  overflow-x: hidden;
+}
+
 html {
   font-size: var(--base-font-size);
 }
@@ -496,7 +501,6 @@ main {
 }
 
 .HeroSection__image {
-  overflow: hidden;
   margin-right: calc(var(--base-padding-x) * -1);
 }
 
