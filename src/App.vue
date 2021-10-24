@@ -87,7 +87,7 @@
       </div>
     </header>
     <section class="UrlShortenSection">
-      <div class="UrlShortenSection__wrapper">
+      <div class="UrlShortenSection__wrapper desktop-wrapper">
         <label for="url-shorten" class="sr-hidden">Shorten a link here</label>
         <input
           type="url"
@@ -559,7 +559,7 @@ main {
 }
 
 .UrlShortenSection__wrapper {
-  background: var(--primary-violet) url('~@/assets/bg-shorten-mobile.svg') no-repeat top right / 70%;
+  background: var(--primary-violet) url('~@/assets/bg-shorten-mobile.svg') no-repeat top right;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -584,6 +584,7 @@ main {
 
 .UrlShortenSection__input {
   padding: 0 16px;
+  width: 100%;
 }
 .UrlShortenSection__input::placeholder {
   color: var(--neutral-700);
@@ -605,6 +606,21 @@ main {
 .UrlShortenSection__btn:focus {
   filter: brightness(1.1);
   outline: 2px solid white;
+}
+
+@media (min-width: 768px) {
+  .UrlShortenSection__wrapper {
+    background-image: url('~@/assets/bg-shorten-desktop.svg');
+    background-position: center;
+    background-size: 100% 100%;
+    flex-direction: row;
+    column-gap: 24px;
+    padding: 48px;
+  }
+
+  .UrlShortenSection__btn {
+    width: 184px;
+  }
 }
 
 /* == Statistics Detail Section == */
