@@ -87,7 +87,7 @@
       </div>
     </header>
     <section class="UrlShortenSection">
-      <div class="UrlShortenSection__wrapper desktop-wrapper">
+      <div class="UrlShortenSection__wrapper desktop-wrapper background-pattern">
         <label for="url-shorten" class="sr-hidden">Shorten a link here</label>
         <input
           type="url"
@@ -559,7 +559,6 @@ main {
 }
 
 .UrlShortenSection__wrapper {
-  background: var(--primary-violet) url('~@/assets/bg-shorten-mobile.svg') no-repeat top right;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -569,6 +568,12 @@ main {
 
   /* So the content is vertically centered over the "dividing" line where the 0-height parent element is */
   transform: translateY(-50%);
+}
+
+.UrlShortenSection__wrapper.background-pattern {
+  background-image: url('~@/assets/bg-shorten-mobile.svg');
+  background-position: top right;
+  background-size: unset;
 }
 
 .UrlShortenSection__wrapper > * {
@@ -610,12 +615,15 @@ main {
 
 @media (min-width: 768px) {
   .UrlShortenSection__wrapper {
-    background-image: url('~@/assets/bg-shorten-desktop.svg');
-    background-position: center;
-    background-size: 100% 100%;
     flex-direction: row;
     column-gap: 24px;
     padding: 48px;
+  }
+
+  .UrlShortenSection__wrapper.background-pattern {
+    background-image: url('~@/assets/bg-shorten-desktop.svg');
+    background-position: center right;
+    background-size: 100% 100%;
   }
 
   .UrlShortenSection__btn {
@@ -777,6 +785,11 @@ main {
 .desktop-wrapper {
   max-width: 1110px;
   margin: 0 auto;
+}
+
+.background-pattern {
+  background-color: var(--primary-violet);
+  background-repeat: no-repeat;
 }
 
 .sr-hidden {
