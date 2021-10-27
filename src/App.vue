@@ -853,13 +853,13 @@ main {
 
 .LinkButton:hover,
 .LinkButton:focus {
-  text-decoration: underline;
+  color: black;
 }
 
 .LinkButton--solid {
   background: var(--primary-cyan);
   border-radius: 28px;
-  color: white;
+  color: white !important;
 }
 
 .LinkButton--solid:hover,
