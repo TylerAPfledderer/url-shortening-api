@@ -1,76 +1,5 @@
 <template>
-  <header class="StickyHeader">
-    <div class="desktop-wrapper">
-      <a href="#">
-        <h1>
-          <img :src="siteLogo" alt="" />
-          <span class="sr-hidden">Shortly</span>
-        </h1>
-      </a>
-      <button
-        v-show="!isLargerThan768Screen"
-        type="button"
-        :aria-expanded="isMenuOpen"
-        class="MenuBtn"
-        @click="toggleMenuOpen"
-      >
-        <svg
-          v-if="!isMenuOpen"
-          aria-hidden="true"
-          focusable="false"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 448 512"
-          class="MenuIcon"
-        >
-          <!--Icon for Closed Menu-->
-          <path
-            fill="currentColor"
-            d="M16 132h416c8.837 0 16-7.163 16-16V76c0-8.837-7.163-16-16-16H16C7.163 60 0 67.163 0 76v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16zm0 160h416c8.837 0 16-7.163 16-16v-40c0-8.837-7.163-16-16-16H16c-8.837 0-16 7.163-16 16v40c0 8.837 7.163 16 16 16z"
-          ></path>
-        </svg>
-        <svg
-          v-else
-          aria-hidden="true"
-          focusable="false"
-          xmlns="http://www.w3.org/2000/svg"
-          viewBox="0 0 352 512"
-          class="MenuIcon"
-        >
-          <!--Icon for Open Menu-->
-          <path
-            fill="currentColor"
-            d="M242.72 256l100.07-100.07c12.28-12.28 12.28-32.19 0-44.48l-22.24-22.24c-12.28-12.28-32.19-12.28-44.48 0L176 189.28 75.93 89.21c-12.28-12.28-32.19-12.28-44.48 0L9.21 111.45c-12.28 12.28-12.28 32.19 0 44.48L109.28 256 9.21 356.07c-12.28 12.28-12.28 32.19 0 44.48l22.24 22.24c12.28 12.28 32.2 12.28 44.48 0L176 322.72l100.07 100.07c12.28 12.28 32.2 12.28 44.48 0l22.24-22.24c12.28-12.28 12.28-32.19 0-44.48L242.72 256z"
-          ></path>
-        </svg>
-      </button>
-      <nav
-        class="MainNav"
-        :class="[isMenuOpen ? 'MainNav--opened' : 'MainNav--closed', isLargerThan768Screen && 'text-color-light']"
-        @click="closeMenuOnLinkClick"
-      >
-        <ul aria-label="page links" class="MainNav__links">
-          <li>
-            <a href="#" class="LinkButton">Features</a>
-          </li>
-          <li>
-            <a href="#" class="LinkButton">Pricing</a>
-          </li>
-          <li>
-            <a href="#" class="LinkButton">Resources</a>
-          </li>
-        </ul>
-        <hr v-show="!isLargerThan768Screen" class="MainNav__divider" />
-        <ul aria-label="account links" class="MainNav__links">
-          <li>
-            <a href="#" class="LinkButton">Login</a>
-          </li>
-          <li>
-            <a href="#" class="LinkButton LinkButton--solid">Sign Up</a>
-          </li>
-        </ul>
-      </nav>
-    </div>
-  </header>
+  <Header />
   <main>
     <header class="HeroSection">
       <div class="desktop-wrapper">
@@ -239,46 +168,14 @@
 </template>
 
 <script setup>
-import siteLogo from '@/assets/logo.svg';
 import heroImg from '@/assets/illustration-working.svg';
 import recognitionImg from '@/assets/icon-brand-recognition.svg';
 import recordsImg from '@/assets/icon-detailed-records.svg';
 import customizeImg from '@/assets/icon-fully-customizable.svg';
-import { ref, watchEffect } from 'vue';
+import Header from '@/components/Header';
+import { ref } from 'vue';
 
-const isMenuOpen = ref(null);
 const urlValue = ref('');
-const isLargerThan768Screen = ref(null);
-
-/**
- * Toggle the menu open/closed state
- */
-const toggleMenuOpen = () => (isMenuOpen.value = !isMenuOpen.value);
-
-/**
- * Close the menu when a link is clicked
- */
-const closeMenuOnLinkClick = (event) =>
-  event.target.tagName === 'A' && !isLargerThan768Screen.value && (isMenuOpen.value = false);
-
-/**
- * Function to set whether or not the window is equal or greater than 768px
- */
-const checkScreenWidthAt768 = () => (isLargerThan768Screen.value = window.innerWidth >= 768);
-
-watchEffect(() => {
-  // Run initial check of the screen width at 1260px on mount
-  checkScreenWidthAt768();
-
-  // Update check as screen width changes.
-  window.addEventListener('resize', () => {
-    checkScreenWidthAt768();
-  });
-
-  // Menu needs to be visible when the screen is equal or greater than 768px
-  //  as the menu button will not be displayed
-  isMenuOpen.value = isLargerThan768Screen.value;
-});
 </script>
 
 <style>
@@ -327,6 +224,8 @@ html {
 body {
   --base-padding-x: 24px;
   font-family: var(--base-font-family);
+  /*  Offset the fixed position header by the height of the header */
+  padding-top: 108px;
 }
 
 h3,
@@ -374,126 +273,15 @@ nav a {
   text-decoration: none;
 }
 
+@media (min-width: 768px) {
+  body {
+    padding-top: 155px;
+  }
+}
+
 @media (min-width: 1024px) {
   body {
     --base-padding-x: 48px;
-  }
-}
-
-/* == Header == */
-
-.StickyHeader {
-  padding: 40px var(--base-padding-x) 24px;
-
-  /* position declared for the nav menu on mobile */
-  position: relative;
-}
-
-.StickyHeader .desktop-wrapper {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.MenuBtn {
-  --square-size: 44px;
-
-  background: transparent;
-  border: none;
-  border-radius: 5px;
-  height: var(--square-size);
-  width: var(--square-size);
-  padding: 8px;
-}
-
-.MenuBtn:focus {
-  outline: 1px solid black;
-}
-
-.MenuIcon path {
-  fill: #aaa;
-}
-
-@media (min-width: 768px) {
-  .StickyHeader {
-    padding-top: 48px;
-    padding-bottom: 80px;
-  }
-}
-
-/* == Navigation == */
-
-.MainNav {
-  background: var(--primary-violet);
-  border-radius: 10px;
-  color: white;
-  padding: 20px 24px;
-  position: absolute;
-  width: calc(100% - (var(--base-padding-x) * 2));
-
-  /* top value equal to the height of the sticky header */
-  top: 108px;
-
-  transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
-}
-
-.MainNav--closed {
-  max-height: 0;
-  opacity: 0;
-  padding: 0;
-  overflow: hidden;
-}
-
-.MainNav--opened {
-  opacity: 1;
-  z-index: 1000;
-}
-
-.MainNav__links {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  padding: 20px 0;
-  row-gap: 12px;
-}
-
-.MainNav__divider {
-  background: var(--neutral-600);
-  height: 1px;
-  opacity: 0.25;
-}
-
-.MainNav__links li {
-  width: 100%;
-}
-
-@media (min-width: 768px) {
-  .MainNav {
-    background: transparent;
-    color: black;
-    display: flex;
-    justify-content: space-between;
-    margin-left: 48px;
-    padding: 0;
-    position: unset;
-  }
-
-  .MainNav__links {
-    flex-direction: row;
-    column-gap: 32px;
-  }
-
-  .MainNav__links li {
-    width: auto;
-  }
-
-  .MainNav__links .LinkButton {
-    padding: 0;
-  }
-
-  .MainNav__links .LinkButton--solid {
-    padding: 8px 24px;
   }
 }
 
@@ -501,6 +289,13 @@ nav a {
 
 main {
   --url-section-margin: 168px;
+}
+
+@media (min-width: 764px) {
+  main {
+    /* Offset spacing with the body element of the fixed header */
+    margin-top: 56px;
+  }
 }
 
 /* == Hero Section == */
@@ -841,7 +636,7 @@ main {
 /* == Utilities == */
 
 .text-color-light {
-  color: var(--neutral-600);
+  color: var(--neutral-600) !important;
 }
 
 .LinkButton {
