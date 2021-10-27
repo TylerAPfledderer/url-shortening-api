@@ -1,6 +1,6 @@
 # Roadmap for Project
 
-- [ ] Build structure within just the `App.vue` file
+- [x] Build structure within just the `App.vue` file
 - [ ] Break into components
   - [ ] Style the components
   - [ ] Build testing files for each component
