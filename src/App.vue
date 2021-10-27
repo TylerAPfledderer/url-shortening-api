@@ -150,7 +150,7 @@
         </ul>
       </div>
     </section>
-    <section class="BoostCtaSection">
+    <section class="BoostCtaSection background-pattern">
       <h3>Boost your links today</h3>
       <a class="LinkButton LinkButton--solid" href="#">Get Started</a>
     </section>
@@ -740,13 +740,24 @@ main {
 /* == Boost CTA Section == */
 
 .BoostCtaSection {
-  background: url('~@/assets/bg-boost-mobile.svg') no-repeat center right/contain var(--primary-violet);
   color: white;
   display: flex;
   flex-direction: column;
   height: 300px;
   justify-content: center;
   align-items: center;
+}
+
+.BoostCtaSection.background-pattern {
+  background-image: url('~@/assets/bg-boost-mobile.svg');
+  background-position: center right;
+  background-size: 100% 100%;
+}
+
+@media (min-width: 768px) {
+  .BoostCtaSection.background-pattern {
+    background-image: url('~@/assets/bg-boost-desktop.svg');
+  }
 }
 
 /* == Footer == */
