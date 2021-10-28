@@ -24,22 +24,22 @@
       >
         <ul aria-label="page links" class="MainNav__links">
           <li>
-            <a href="#" class="LinkButton">Features</a>
+            <LinkButton name="Features" />
           </li>
           <li>
-            <a href="#" class="LinkButton">Pricing</a>
+            <LinkButton name="Pricing" />
           </li>
           <li>
-            <a href="#" class="LinkButton">Resources</a>
+            <LinkButton name="Resources" />
           </li>
         </ul>
         <hr v-show="!isLargerThan768Screen" class="MainNav__divider" />
         <ul aria-label="account links" class="MainNav__links">
           <li>
-            <a href="#" class="LinkButton">Login</a>
+            <LinkButton name="Login" />
           </li>
           <li>
-            <a href="#" class="LinkButton LinkButton--solid">Sign Up</a>
+            <LinkButton name="Sign Up" solid-variant />
           </li>
         </ul>
       </nav>
@@ -52,6 +52,7 @@ import InlineSvg from 'vue-inline-svg';
 import siteLogo from '@/assets/logo.svg';
 import closeIcon from '@/assets/close.svg';
 import hamIcon from '@/assets/menu-bars.svg';
+import LinkButton from '../LinkButton.vue';
 
 const isMenuOpen = ref(null);
 const isLargerThan768Screen = ref(null);
@@ -124,12 +125,6 @@ watchEffect(() => {
   color: #aaa;
 }
 
-@media (min-width: 768px) {
-  .StickyHeader {
-    padding-top: 48px;
-  }
-}
-
 /* == Navigation == */
 
 .MainNav {
@@ -173,6 +168,10 @@ watchEffect(() => {
 }
 
 @media (min-width: 768px) {
+  .StickyHeader {
+    padding-top: 48px;
+  }
+
   .MainNav {
     background: transparent;
     display: flex;
@@ -189,14 +188,6 @@ watchEffect(() => {
 
   .MainNav__links li {
     width: auto;
-  }
-
-  .MainNav__links .LinkButton {
-    padding: 0;
-  }
-
-  .MainNav__links .LinkButton--solid {
-    padding: 8px 24px;
   }
 }
 </style>
