@@ -13,6 +13,7 @@
         :aria-expanded="isMenuOpen"
         class="MenuBtn"
         @click="toggleMenuOpen"
+        data-test="menu-btn"
       >
         <InlineSvg v-if="!isMenuOpen" :src="hamIcon" class="MenuIcon" />
         <InlineSvg v-else :src="closeIcon" class="MenuIcon" />
@@ -21,6 +22,7 @@
         class="MainNav"
         :class="[!isMenuOpen && 'MainNav--closed', isLargerThan768Screen && 'text-color-light']"
         @click="closeMenuOnLinkClick"
+        data-test="main-nav"
       >
         <ul aria-label="page links" class="MainNav__links">
           <li>
