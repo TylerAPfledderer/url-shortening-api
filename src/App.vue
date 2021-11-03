@@ -639,31 +639,6 @@ main {
   color: var(--neutral-600) !important;
 }
 
-.LinkButton {
-  font-weight: var(--font-weight-bold);
-  text-decoration: none;
-  text-align: center;
-  padding: 12px 40px;
-}
-
-.LinkButton:hover,
-.LinkButton:focus {
-  color: black;
-}
-
-.LinkButton--solid {
-  background: var(--primary-cyan);
-  border-radius: 28px;
-  color: white !important;
-}
-
-.LinkButton--solid:hover,
-.LinkButton--solid:focus {
-  text-decoration: none !important;
-  filter: brightness(1.1);
-  outline: 2px solid white;
-}
-
 .desktop-wrapper {
   max-width: 1110px;
   margin: 0 auto;
