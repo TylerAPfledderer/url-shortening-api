@@ -283,6 +283,11 @@ nav a {
   margin: 0 auto;
 }
 
+.background-pattern {
+  background-color: var(--primary-violet);
+  background-repeat: no-repeat;
+}
+
 .sr-hidden {
   position: absolute;
   top: -9999px;

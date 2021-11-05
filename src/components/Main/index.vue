@@ -366,10 +366,4 @@ main {
     background-image: url('~@/assets/bg-boost-desktop.svg');
   }
 }
-
-/* == Utilities == */
-.background-pattern {
-  background-color: var(--primary-violet);
-  background-repeat: no-repeat;
-}
 </style>
