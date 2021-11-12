@@ -123,11 +123,6 @@ nav a {
   color: var(--neutral-600) !important;
 }
 
-.desktop-wrapper {
-  max-width: 1110px;
-  margin: 0 auto;
-}
-
 .background-pattern {
   background-color: var(--primary-violet);
   background-repeat: no-repeat;
