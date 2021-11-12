@@ -31,7 +31,7 @@ defineProps({
 
 .LinkButton:hover,
 .LinkButton:focus {
-  color: black;
+  color: var(--primary-cyan);
 }
 
 .LinkButton--solid {
@@ -56,6 +56,10 @@ defineProps({
 }
 
 @media (min-width: 768px) {
+  .LinkButton:hover,
+  .LinkButton:focus {
+    color: black;
+  }
   .LinkButton:not(.LinkButton--solid) {
     padding: 0;
   }
