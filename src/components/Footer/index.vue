@@ -1,6 +1,6 @@
 <template>
   <footer class="Footer">
-    <div class="desktop-wrapper">
+    <DesktopWrapper>
       <div class="Footer__logo">
         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 121 33">
           <path
@@ -78,10 +78,12 @@
           </li>
         </ul>
       </nav>
-    </div>
+    </DesktopWrapper>
   </footer>
 </template>
-<script setup></script>
+<script setup>
+import DesktopWrapper from '../DesktopWrapper.vue';
+</script>
 <style scoped>
 .Footer {
   background: var(--neutral-800);
@@ -89,11 +91,8 @@
   padding: 54px 0;
 }
 
-.Footer .desktop-wrapper {
-  display: flex;
-  flex-direction: column;
+.Footer .DesktopWrapper {
   gap: 48px;
-  align-items: center;
 }
 
 .Footer__logo {
@@ -141,9 +140,8 @@
     padding: 72px var(--base-padding-x);
   }
 
-  .Footer .desktop-wrapper {
+  .Footer .DesktopWrapper {
     flex-direction: row;
-    justify-content: space-between;
     align-items: flex-start;
   }
 

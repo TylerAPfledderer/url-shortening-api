@@ -1,6 +1,6 @@
 <template>
   <section class="UrlShortenSection">
-    <div class="UrlShortenSection__wrapper desktop-wrapper background-pattern">
+    <DesktopWrapper class="background-pattern">
       <label for="url-shorten" class="sr-hidden">Shorten a link here</label>
       <input
         type="url"
@@ -11,11 +11,12 @@
         class="UrlShortenSection__input"
       />
       <button type="submit" class="UrlShortenSection__btn">Shorten It!</button>
-    </div>
+    </DesktopWrapper>
   </section>
 </template>
 <script setup>
 import { ref } from 'vue';
+import DesktopWrapper from '../DesktopWrapper.vue';
 
 const urlValue = ref('');
 </script>
@@ -25,7 +26,8 @@ const urlValue = ref('');
   height: 0;
 }
 
-.UrlShortenSection__wrapper {
+.UrlShortenSection .DesktopWrapper {
+  align-items: stretch;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -37,13 +39,13 @@ const urlValue = ref('');
   transform: translateY(-50%);
 }
 
-.UrlShortenSection__wrapper.background-pattern {
+.UrlShortenSection .background-pattern {
   background-image: url('~@/assets/bg-shorten-mobile.svg');
   background-position: top right;
   background-size: unset;
 }
 
-.UrlShortenSection__wrapper > * {
+.DesktopWrapper > * {
   border-radius: 5px;
   border: none;
   height: 48px;
@@ -81,13 +83,13 @@ const urlValue = ref('');
 }
 
 @media (min-width: 768px) {
-  .UrlShortenSection__wrapper {
+  .UrlShortenSection .DesktopWrapper {
     flex-direction: row;
     column-gap: 24px;
     padding: 48px;
   }
 
-  .UrlShortenSection__wrapper.background-pattern {
+  .UrlShortenSection .background-pattern {
     background-image: url('~@/assets/bg-shorten-desktop.svg');
     background-position: center right;
     background-size: 100% 100%;

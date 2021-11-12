@@ -1,6 +1,6 @@
 <template>
   <header class="HeroSection">
-    <div class="desktop-wrapper">
+    <DesktopWrapper>
       <div class="HeroSection__image">
         <img :src="heroImg" />
       </div>
@@ -11,19 +11,20 @@
         </p>
         <LinkButton name="Get Started" solidVariant size="large" />
       </div>
-    </div>
+    </DesktopWrapper>
   </header>
 </template>
 <script setup>
 import heroImg from '@/assets/illustration-working.svg';
 import LinkButton from '../LinkButton.vue';
+import DesktopWrapper from '../DesktopWrapper.vue';
 </script>
 <style scoped>
 .HeroSection {
   padding: 0 var(--base-padding-x) var(--url-section-margin);
 }
 
-.HeroSection .desktop-wrapper {
+.HeroSection .DesktopWrapper {
   align-items: center;
   display: flex;
   flex-direction: column;
@@ -48,7 +49,7 @@ import LinkButton from '../LinkButton.vue';
 }
 
 @media (min-width: 1024px) {
-  .HeroSection .desktop-wrapper {
+  .HeroSection .DesktopWrapper {
     flex-direction: row-reverse;
   }
 
@@ -64,7 +65,7 @@ import LinkButton from '../LinkButton.vue';
 }
 
 @media (min-width: 1206px) {
-  .HeroSection .desktop-wrapper {
+  .HeroSection .DesktopWrapper {
     column-gap: 96px;
   }
 }

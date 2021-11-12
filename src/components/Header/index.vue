@@ -1,6 +1,6 @@
 <template>
   <header class="StickyHeader">
-    <div class="desktop-wrapper">
+    <DesktopWrapper>
       <a href="#">
         <h1>
           <img :src="siteLogo" alt="" />
@@ -45,7 +45,7 @@
           </li>
         </ul>
       </nav>
-    </div>
+    </DesktopWrapper>
   </header>
 </template>
 <script setup>
@@ -55,6 +55,7 @@ import siteLogo from '@/assets/logo.svg';
 import closeIcon from '@/assets/close.svg';
 import hamIcon from '@/assets/menu-bars.svg';
 import LinkButton from '../LinkButton.vue';
+import DesktopWrapper from '../DesktopWrapper.vue';
 
 const isMenuOpen = ref(null);
 const isLargerThan768Screen = ref(null);
@@ -102,10 +103,8 @@ watchEffect(() => {
   z-index: 2000;
 }
 
-.StickyHeader .desktop-wrapper {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+.StickyHeader .DesktopWrapper {
+  flex-direction: row;
 }
 
 .MenuBtn {
@@ -172,6 +171,10 @@ watchEffect(() => {
 @media (min-width: 768px) {
   .StickyHeader {
     padding-top: 48px;
+  }
+
+  .StickyHeader .DesktopWrapper {
+    flex-direction: row;
   }
 
   .MainNav {

@@ -1,6 +1,6 @@
 <template>
   <section class="StatisticsDetailSection">
-    <div class="desktop-wrapper">
+    <DesktopWrapper>
       <div class="heading-text">
         <h3>
           Advanced Statistics
@@ -47,13 +47,14 @@
           </div>
         </li>
       </ul>
-    </div>
+    </DesktopWrapper>
   </section>
 </template>
 <script setup>
 import recognitionImg from '@/assets/icon-brand-recognition.svg';
 import recordsImg from '@/assets/icon-detailed-records.svg';
 import customizeImg from '@/assets/icon-fully-customizable.svg';
+import DesktopWrapper from '../DesktopWrapper.vue';
 </script>
 <style scoped>
 .StatisticsDetailSection {
@@ -62,10 +63,7 @@ import customizeImg from '@/assets/icon-fully-customizable.svg';
   text-align: center;
 }
 
-.StatisticsDetailSection .desktop-wrapper {
-  align-items: center;
-  display: flex;
-  flex-direction: column;
+.StatisticsDetailSection .DesktopWrapper {
   gap: 96px;
 }
 
