@@ -29,9 +29,6 @@ const urlValue = ref('');
 .UrlShortenSection .DesktopWrapper {
   align-items: stretch;
   border-radius: 10px;
-  display: flex;
-  flex-direction: column;
-  margin: auto;
   padding: var(--base-padding-x);
   row-gap: 16px;
 
