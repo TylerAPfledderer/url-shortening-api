@@ -68,7 +68,22 @@ watchEffect(() => {
   background-size: unset;
 }
 
-.DesktopWrapper > * {
+form {
+  /**
+   * This form element is treated as a wrapper for the proper submission functionality.
+   * It inherits most of the styling from the DesktopWrapper that is being scoped in this component.
+   */
+  align-items: inherit;
+  display: inherit;
+  flex-direction: inherit;
+  gap: inherit;
+
+  /* Width is not default to 100% */
+  width: 100%;
+}
+
+.UrlShortenSection__input,
+.UrlShortenSection__btn {
   border-radius: 5px;
   border: none;
   height: 48px;
@@ -88,6 +103,26 @@ watchEffect(() => {
   opacity: 0.5;
   font-size: 16px;
   letter-spacing: 0.5px;
+}
+
+.input-wrap {
+  position: relative;
+  width: 100%;
+}
+
+.inputError {
+  padding-bottom: 35px;
+}
+
+.inputError input {
+  outline: 3px solid #f46363;
+}
+
+.inputError p {
+  color: #f46363;
+  font-style: italic;
+  position: absolute;
+  bottom: 0;
 }
 
 .UrlShortenSection__btn {
@@ -116,6 +151,14 @@ watchEffect(() => {
     background-image: url('~@/assets/bg-shorten-desktop.svg');
     background-position: center right;
     background-size: 100% 100%;
+  }
+
+  .inputError {
+    padding-bottom: 0;
+  }
+
+  .inputError p {
+    bottom: -35px;
   }
 
   .UrlShortenSection__btn {
