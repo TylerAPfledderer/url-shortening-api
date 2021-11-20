@@ -1,24 +1,50 @@
 <template>
   <section class="UrlShortenSection">
     <DesktopWrapper class="background-pattern">
-      <label for="url-shorten" class="sr-hidden">Shorten a link here</label>
-      <input
-        type="url"
-        v-model="urlValue"
-        name="url-shorten"
-        id="url-shorten"
-        placeholder="Shorten a link here..."
-        class="UrlShortenSection__input"
-      />
-      <button type="submit" class="UrlShortenSection__btn">Shorten It!</button>
+      <form @submit.prevent="handleUrl" novalidate>
+        <label for="url-shorten" class="sr-hidden">Shorten a link here</label>
+        <div class="input-wrap" :class="{ inputError: hasErr }">
+          <input
+            type="url"
+            v-model="urlValue"
+            name="url-shorten"
+            id="url-shorten"
+            placeholder="Shorten a link here..."
+            class="UrlShortenSection__input"
+            required
+          />
+          <p v-show="hasErr">{{ errMessage }}</p>
+        </div>
+        <button type="submit" class="UrlShortenSection__btn">{{ isLoading ? 'Loading...' : 'Shorten It!' }}</button>
+      </form>
     </DesktopWrapper>
   </section>
 </template>
 <script setup>
-import { ref } from 'vue';
+import { ref, computed, watchEffect } from 'vue';
+import { useStore } from 'vuex';
 import DesktopWrapper from '../DesktopWrapper.vue';
 
+const store = useStore();
+
 const urlValue = ref('');
+
+const isLoading = computed(() => store.state.isLoading);
+
+const hasErr = computed(() => store.state.hasServerErr);
+
+const errMessage = computed(() => store.state.serverErrMsg);
+
+function handleUrl() {
+  store.dispatch('createShortenUrl', { inputUrl: urlValue.value });
+}
+
+watchEffect(() => {
+  // Clear the input field only when the API return is a success
+  if (!hasErr.value) {
+    urlValue.value = '';
+  }
+});
 </script>
 <style scoped>
 .UrlShortenSection {
