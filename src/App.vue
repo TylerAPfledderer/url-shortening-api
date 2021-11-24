@@ -5,9 +5,18 @@
 </template>
 
 <script setup>
+import { useStore } from 'vuex';
 import Header from '@/components/Header';
 import Main from '@/components/Main';
 import Footer from './components/Footer/index.vue';
+
+const { commit } = useStore();
+
+const localUrls = localStorage.getItem('generatedUrls');
+
+if (localUrls) {
+  commit('SET_URLS', JSON.parse(localUrls));
+}
 </script>
 
 <style>

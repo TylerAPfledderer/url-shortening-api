@@ -10,6 +10,9 @@ export default createStore({
     isLoading: false,
   },
   mutations: {
+    SET_URLS(state, urls) {
+      state.generatedUrls = urls;
+    },
     ADD_URLS(state, { inputUrl, generatedUrl }) {
       state.generatedUrls = [...state.generatedUrls, { inputUrl, generatedUrl }];
     },
