@@ -40,11 +40,11 @@ export default createStore({
     /**
      * Pass in the input url and run shrtcode apu
      */
-    createShortenUrl({ commit }, { inputUrl }) {
+    async createShortenUrl({ commit }, { inputUrl }) {
       // Show loading visual is there is server lag
-      commit('SET_LOADING', true);
+      await commit('SET_LOADING', true);
 
-      fetch(`https://api.shrtco.de/v2/shorten?url=${inputUrl}`)
+      await fetch(`https://api.shrtco.de/v2/shorten?url=${inputUrl}`)
         .then((res) => res.json())
         .then(({ ok, error_code, result }) => {
           if (!ok) {
@@ -69,7 +69,7 @@ export default createStore({
           commit('SET_SERVER_ERROR', { hasErr: true, message: err.message });
         });
 
-      commit('SET_LOADING', false);
+      await commit('SET_LOADING', false);
     },
   },
   strict: debug,
