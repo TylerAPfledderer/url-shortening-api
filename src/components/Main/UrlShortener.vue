@@ -21,7 +21,7 @@
   </section>
 </template>
 <script setup>
-import { ref, computed, watchEffect } from 'vue';
+import { ref, computed } from 'vue';
 import { useStore } from 'vuex';
 import DesktopWrapper from '../DesktopWrapper.vue';
 
@@ -35,16 +35,12 @@ const hasErr = computed(() => store.state.hasServerErr);
 
 const errMessage = computed(() => store.state.serverErrMsg);
 
-function handleUrl() {
-  store.dispatch('createShortenUrl', { inputUrl: urlValue.value });
-}
-
-watchEffect(() => {
-  // Clear the input field only when the API return is a success
+async function handleUrl() {
+  await store.dispatch('createShortenUrl', { inputUrl: urlValue.value });
   if (!hasErr.value) {
     urlValue.value = '';
   }
-});
+}
 </script>
 <style scoped>
 .UrlShortenSection {
