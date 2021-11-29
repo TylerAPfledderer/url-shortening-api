@@ -28,6 +28,9 @@ export default createStore({
         case 5:
           errMsg = 'The "shrtcode" url is already taken';
           break;
+        case 10:
+          errMsg = 'Not allowed to shorten.';
+          break;
         default:
           errMsg = message;
           break;
