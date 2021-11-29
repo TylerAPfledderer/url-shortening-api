@@ -6,7 +6,7 @@
   >
     <DesktopWrapper>
       <ul style="width: 100%;">
-        <SingleResult v-for="(urlPair, index) in generatedUrls" :key="index" v-bind="urlPair" />
+        <SingleResult v-for="urlPair in generatedUrls" :key="urlPair.id" v-bind="urlPair" />
       </ul>
     </DesktopWrapper>
   </section>

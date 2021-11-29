@@ -1,4 +1,5 @@
 import { createStore } from 'vuex';
+import { uuid } from 'vue-uuid';
 
 const debug = process.env.NODE_ENV !== 'production';
 
@@ -58,7 +59,7 @@ export default createStore({
             commit('SET_SERVER_ERROR', { hasErr: true, message: error_code });
             return;
           }
-          const newUrl = { inputUrl, generatedUrl: result?.full_short_link };
+          const newUrl = { id: uuid.v1(), inputUrl, generatedUrl: result?.full_short_link };
 
           // Add Generated URL and Input Url to the array
           commit('ADD_URLS', newUrl);
