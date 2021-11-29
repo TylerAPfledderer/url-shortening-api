@@ -2,6 +2,7 @@
   <main>
     <Hero />
     <UrlShortener />
+    <ShortenerResults />
     <StatisticDetails />
     <BoostCta />
   </main>
@@ -9,6 +10,7 @@
 <script setup>
 import Hero from './Hero.vue';
 import UrlShortener from './UrlShortener.vue';
+import ShortenerResults from './ShortenerResults';
 import StatisticDetails from './StatisticDetails.vue';
 import BoostCta from './BoostCta.vue';
 </script>
