@@ -1,10 +1,10 @@
 <template>
   <li class="GeneratedUrlGroup">
     <div>
-      <span>{{ inputUrl }}</span>
+      <span data-test="input-url">{{ inputUrl }}</span>
     </div>
     <div>
-      <span>{{ generatedUrl }}</span>
+      <span data-test="generated-url">{{ generatedUrl }}</span>
       <button
         type="button"
         class="GeneratedUrlGroup__copy"
