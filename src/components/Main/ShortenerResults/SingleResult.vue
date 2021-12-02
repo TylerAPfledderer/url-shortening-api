@@ -1,5 +1,5 @@
 <template>
-  <li class="GeneratedUrlGroup">
+  <li class="GeneratedUrlGroup" data-test="single-result-item">
     <div>
       <span data-test="input-url">{{ inputUrl }}</span>
     </div>
@@ -11,6 +11,7 @@
         :class="{ 'is-copied': isCopied }"
         @click="handleCopyUrl(generatedUrl)"
         :aria-pressed="isCopied"
+        data-test="url-copy-button"
       >
         {{ isCopied ? 'Copied!' : 'Copy' }}
       </button>
