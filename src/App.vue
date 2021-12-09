@@ -1,10 +1,16 @@
 <template>
-  <Header />
-  <Main />
-  <Footer />
+  <div @click="handleDumbyLinkToast">
+    <Header />
+    <Main />
+    <Footer />
+  </div>
+  <div class="dumby-link-toast" :class="toastClass">
+    Thank you for trying out the link, but unfortunately it leads to nowhere in this demo. :(
+  </div>
 </template>
 
 <script setup>
+import { ref } from 'vue';
 import { useStore } from 'vuex';
 import Header from '@/components/Header';
 import Main from '@/components/Main';
@@ -16,6 +22,18 @@ const localUrls = localStorage.getItem('generatedUrls');
 
 if (localUrls) {
   commit('SET_URLS', JSON.parse(localUrls));
+}
+
+const toastClass = ref(null);
+function handleDumbyLinkToast({ target }) {
+  if (target.tagName === 'A' && target.attributes.href.value === '#') {
+    // Don't have the anchor force the user back to the top of the page
+    event.preventDefault();
+    toastClass.value = 'show-toast';
+    setTimeout(() => {
+      toastClass.value = 'hide-toast';
+    }, 3000);
+  }
 }
 </script>
 
@@ -124,6 +142,44 @@ nav a {
   body {
     --base-padding-x: 48px;
   }
+}
+
+@keyframes showToast {
+  0% {
+    bottom: -200px;
+  }
+  100% {
+    bottom: 16px;
+  }
+}
+
+@keyframes hideToast {
+  0% {
+    bottom: 16px;
+  }
+  100% {
+    bottom: -200px;
+  }
+}
+
+.show-toast {
+  animation: showToast forwards 0.5s cubic-bezier(0.76, 0.05, 0.86, 0.06);
+}
+
+.hide-toast {
+  animation: hideToast forwards 0.5s cubic-bezier(0.76, 0.05, 0.86, 0.06);
+}
+
+.dumby-link-toast {
+  background: #eb0000;
+  border-radius: 10px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;
+  color: white;
+  padding: 16px;
+  position: fixed;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 300px;
 }
 
 /* == Utilities == */
