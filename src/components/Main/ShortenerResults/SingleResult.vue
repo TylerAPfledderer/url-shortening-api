@@ -1,6 +1,6 @@
 <template>
   <li class="GeneratedUrlGroup" data-test="single-result-item">
-    <div>
+    <div style="overflow-x: auto;">
       <span data-test="input-url">{{ inputUrl }}</span>
     </div>
     <div>
