@@ -15,7 +15,7 @@ export default createStore({
       state.generatedUrls = urls;
     },
     ADD_URLS(state, { inputUrl, generatedUrl }) {
-      state.generatedUrls = [...state.generatedUrls, { inputUrl, generatedUrl }];
+      state.generatedUrls = [{ inputUrl, generatedUrl }, ...state.generatedUrls];
     },
     SET_SERVER_ERROR(state, { hasErr, message }) {
       let errMsg = '';
@@ -65,7 +65,7 @@ export default createStore({
           commit('ADD_URLS', newUrl);
           // Send to local storage
           const prevStorage = JSON.parse(localStorage.getItem('generatedUrls'));
-          const newStorage = prevStorage ? [...prevStorage, newUrl] : [newUrl];
+          const newStorage = prevStorage ? [newUrl, ...prevStorage] : [newUrl];
           localStorage.setItem('generatedUrls', JSON.stringify(newStorage));
 
           // Ensure Server Error States are cleared
