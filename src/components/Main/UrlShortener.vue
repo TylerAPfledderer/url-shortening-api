@@ -25,18 +25,18 @@ import { ref, computed } from 'vue';
 import { useStore } from 'vuex';
 import DesktopWrapper from '../DesktopWrapper.vue';
 
-const store = useStore();
+const { state, dispatch } = useStore();
 
 const urlValue = ref('');
 
-const isLoading = computed(() => store.state.isLoading);
+const isLoading = computed(() => state.isLoading);
 
-const hasErr = computed(() => store.state.hasServerErr);
+const hasErr = computed(() => state.hasServerErr);
 
-const errMessage = computed(() => store.state.serverErrMsg);
+const errMessage = computed(() => state.serverErrMsg);
 
 async function handleUrl() {
-  await store.dispatch('createShortenUrl', { inputUrl: urlValue.value });
+  await dispatch('createShortenUrl', { inputUrl: urlValue.value });
   if (!hasErr.value) {
     urlValue.value = '';
   }
