@@ -32,6 +32,9 @@ export default createStore({
         case 10:
           errMsg = 'Not allowed to shorten.';
           break;
+        case 'NetworkError when attempting to fetch resource.':
+          errMsg = 'Please check your internet connection';
+          break;
         default:
           errMsg = message;
           break;
