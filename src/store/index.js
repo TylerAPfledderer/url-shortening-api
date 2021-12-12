@@ -9,6 +9,7 @@ export default createStore({
     hasServerErr: null,
     serverErrMsg: '',
     isLoading: false,
+    isStillLoading: false,
   },
   mutations: {
     SET_URLS(state, urls) {
@@ -45,14 +46,23 @@ export default createStore({
     SET_LOADING(state, isLoading) {
       state.isLoading = isLoading;
     },
+    SET_TOO_LONG_LOADING(state, stillLoading) {
+      state.isStillLoading = stillLoading;
+    },
   },
   actions: {
     /**
      * Pass in the input url and run shrtcode apu
      */
-    async createShortenUrl({ commit }, { inputUrl }) {
+    async createShortenUrl({ commit, state }, { inputUrl }) {
       // Show loading visual is there is server lag
-      await commit('SET_LOADING', true);
+      commit('SET_LOADING', true);
+
+      const tooLongTimeout = setTimeout(() => {
+        if (state.isLoading) {
+          commit('SET_TOO_LONG_LOADING', true);
+        }
+      }, 3000);
 
       await fetch(`https://api.shrtco.de/v2/shorten?url=${inputUrl}`)
         .then((res) => res.json())
@@ -78,6 +88,9 @@ export default createStore({
           console.error('Something went wrong: ', err);
           commit('SET_SERVER_ERROR', { hasErr: true, message: err.message });
         });
+
+      await commit('SET_TOO_LONG_LOADING', false);
+      clearTimeout(tooLongTimeout);
 
       await commit('SET_LOADING', false);
     },

@@ -4,19 +4,19 @@
     <Main />
     <Footer />
   </div>
-  <div class="dumby-link-toast" :class="toastClass">
-    Thank you for trying out the link, but unfortunately it leads to nowhere in this demo. :(
+  <div class="toast" :class="toastClass">
+    {{ toastMsg }}
   </div>
 </template>
 
 <script setup>
-import { ref } from 'vue';
+import { computed, ref, watchEffect } from 'vue';
 import { useStore } from 'vuex';
 import Header from '@/components/Header';
 import Main from '@/components/Main';
 import Footer from './components/Footer/index.vue';
 
-const { commit } = useStore();
+const { commit, state } = useStore();
 
 const localUrls = localStorage.getItem('generatedUrls');
 
@@ -25,15 +25,38 @@ if (localUrls) {
 }
 
 const toastClass = ref(null);
-function handleDumbyLinkToast({ target }) {
+const toastMsg = ref('');
+
+/** Store state based on if the url shortener is taking to long to return a response upon submission */
+const isStillLoading = computed(() => state.isStillLoading);
+
+watchEffect(() => {
+  // Reveal the toast with a related message if the url shortener api is taking too long to return
+  // Else, immediately remove the toast and text without animation
+  if (isStillLoading.value) {
+    toastMsg.value = 'This is taking longer than expected. Please wait...';
+    toastClass.value = 'show-toast';
+  } else {
+    toastMsg.value = '';
+    toastClass.value = null;
+  }
+});
+
+function handleDumbyLinkToast(event) {
+  const { target } = event;
   if (target.tagName === 'A' && target.attributes.href.value === '#') {
     // Don't have the anchor force the user back to the top of the page
     event.preventDefault();
+
     toastClass.value = 'show-toast';
+    toastMsg.value = 'Thank you for trying out the link, but unfortunately it leads to nowhere in this demo. :(';
     setTimeout(() => {
       toastClass.value = 'hide-toast';
+      toastMsg.value = '';
     }, 3000);
+    return;
   }
+  return;
 }
 </script>
 
@@ -167,10 +190,10 @@ nav a {
 }
 
 .hide-toast {
-  animation: hideToast forwards 0.5s cubic-bezier(0.76, 0.05, 0.86, 0.06);
+  animation: hideToast forwards 0.1s cubic-bezier(0.76, 0.05, 0.86, 0.06);
 }
 
-.dumby-link-toast {
+.toast {
   background: #eb0000;
   border-radius: 10px;
   box-shadow: rgba(50, 50, 93, 0.25) 0px 13px 27px -5px, rgba(0, 0, 0, 0.3) 0px 8px 16px -8px;

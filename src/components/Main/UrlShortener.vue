@@ -15,7 +15,14 @@
           />
           <p v-show="hasErr">{{ errMessage }}</p>
         </div>
-        <button type="submit" class="UrlShortenSection__btn">{{ isLoading ? 'Loading...' : 'Shorten It!' }}</button>
+        <button
+          type="submit"
+          class="UrlShortenSection__btn"
+          :style="[isLoading && { cursor: 'default' }, isStillLoading && { filter: 'grayscale(50%)' }]"
+          :disabled="isLoading"
+        >
+          {{ isLoading ? 'Loading...' : 'Shorten It!' }}
+        </button>
       </form>
     </DesktopWrapper>
   </section>
@@ -30,6 +37,8 @@ const { state, dispatch } = useStore();
 const urlValue = ref('');
 
 const isLoading = computed(() => state.isLoading);
+
+const isStillLoading = computed(() => state.isStillLoading);
 
 const hasErr = computed(() => state.hasServerErr);
 
