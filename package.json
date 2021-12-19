@@ -1,5 +1,5 @@
 {
-  "name": "uri-shortening-api",
+  "name": "url-shortening-api",
   "version": "0.1.0",
   "private": true,
   "scripts": {
