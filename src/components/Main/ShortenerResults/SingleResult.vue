@@ -10,10 +10,10 @@
         class="GeneratedUrlGroup__copy"
         :class="{ 'is-copied': isCopied }"
         @click="handleCopyUrl(generatedUrl)"
-        :aria-pressed="isCopied"
         data-test="url-copy-button"
       >
-        {{ isCopied ? 'Copied!' : 'Copy' }}
+        <span :aria-hidden="isCopied"> Copy </span>
+        <span class="sr-hidden"> {{ inputUrl }} shortened URL</span>
       </button>
     </div>
   </li>
@@ -69,7 +69,7 @@ async function handleCopyUrl(url) {
   gap: 12px 24px;
 }
 
-.GeneratedUrlGroup > *:last-child span {
+.GeneratedUrlGroup > *:last-child > span {
   color: var(--primary-cyan);
 }
 
@@ -93,8 +93,17 @@ async function handleCopyUrl(url) {
 
 .GeneratedUrlGroup__copy.is-copied {
   background: var(--primary-violet);
-  color: white;
+  color: transparent;
   transition: background 0.2s ease-in-out, color 0.2s ease-in-out;
+}
+
+.GeneratedUrlGroup__copy.is-copied::before {
+  content: 'Copied!';
+  color: white;
+  position: absolute;
+  left: 0;
+  text-align: center;
+  width: 100%;
 }
 
 @media (min-width: 1024px) {
